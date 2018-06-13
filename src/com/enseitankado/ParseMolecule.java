@@ -1,20 +1,9 @@
 package com.enseitankado;
 
-import java.util.Arrays;
-import java.util.HashMap;
+
 import java.util.Map;
 import java.util.TreeMap;
 
-//        String water = "H2O";
-//        parseMolecule.getAtoms(water); // return [H: 2, O: 1]
-//
-//        String magnesiumHydroxide = "Mg(OH)2";
-//        parseMolecule.getAtoms(magnesiumHydroxide); // return ["Mg": 1, "O": 2, "H": 2]
-//
-//        String fremySalt = "K4[ON(SO3)2]2";
-//        parseMolecule.getAtoms(fremySalt); // return ["K": 4, "O": 14, "N": 2, "S": 4]
-//
-//        parseMolecule.getAtoms("pie"); // throw an IllegalArgumentException
 
 public class ParseMolecule {
 
@@ -47,14 +36,9 @@ public class ParseMolecule {
         }
 
 
-        if ((formula.contains("(")) || formula.contains(")")) {
-            startpoint = formula.indexOf("(");
-            endpoint = formula.indexOf(")");
-
-        }
-
-
         for (int i = 0; i <= formula.length() - 1; i++) {
+
+
 
             char previousSign;
             char nextNextSign;
@@ -78,8 +62,12 @@ public class ParseMolecule {
                 nextNextSign = formula.charAt(i + 2);
             }
 
-
             currentSign = formula.charAt(i);
+
+            if(nextSign == ' '){
+                System.out.println("found null");
+                continue;
+            }
 
             boolean isDigitBefore = Character.isDigit(previousSign);
             boolean isUpperCaseBefore = Character.isUpperCase(previousSign);
@@ -98,7 +86,8 @@ public class ParseMolecule {
             boolean isCurrentLowerCase = Character.isLowerCase(nextSign);
 
 
-            if ((isCurrentUpperCase && (isNextLowerCase || isNextDigit || isNextUpperCase || nextSign == 0 || isNextLeftBracket || isNextRightBracket))
+            if ((isCurrentUpperCase && (isNextLowerCase || isNextDigit || isNextUpperCase
+                    || nextSign == 0 || isNextLeftBracket || isNextRightBracket))
 
                     ) {
                 StringBuilder elementary = new StringBuilder();
@@ -113,9 +102,6 @@ public class ParseMolecule {
 
                     secondMultiplier = Character.getNumericValue(nextSign);
 
-//                } else if ((isNextNextDigit && isNextLeftBracket) && !isNextUpperCase && (nextNextSign != ')')) {
-//                    secondMultiplier = Character.getNumericValue(nextNextSign);
-//                }
 
                 } else if (((isNextNextDigit && isNextLeftBracket) && !isNextUpperCase && (!isNextLeftBracket)) || (isNextNextDigit && !isNextLeftBracket && !isNextUpperCase)) {
                     secondMultiplier = Character.getNumericValue(nextNextSign);
@@ -143,8 +129,8 @@ public class ParseMolecule {
 
                 int result = firstMultiplier * secondMultiplier * thirdMultiplier * fourthMultiplier;
 
-                //System.out.println(String.format("| %1$-14s| %2$-30s", elementary, result));
-                //System.out.println("            "+elementary + " -> " + firstMultiplier + " : " + secondMultiplier + " : " + thirdMultiplier);
+                // Uncomment this line to check 1,2 and 3 multipliers
+                // System.out.println("            "+elementary + "." + " -> " + firstMultiplier + " : " + secondMultiplier + " : " + thirdMultiplier);
 
 
                 String tempElementary = elementary.toString();
@@ -166,13 +152,8 @@ public class ParseMolecule {
                     System.out.println("Error");
                 }
 
-               // System.out.print(resultsTable.toString());
-
-
             }
 
-//            System.out.println(resultsTable.equals(new Object[][] { {Arrays.asList("H", "O"),
-//                    Arrays.asList( 2,   1 )}}));
 
         }
         return resultsTable;
