@@ -1,13 +1,17 @@
 package com.enseitankado;
 
 import java.util.*;
+
+import com.enseitankado.ParseMolecule;import java.util.*;
+import java.util.*;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.runners.JUnit4;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
+
+import static org.junit.Assert.assertEquals;
 
 
 @RunWith(Parameterized.class)
@@ -15,10 +19,10 @@ public class SolutionTest {
 
     @Parameters
     public static Collection<Object[]> data() {
-        return Arrays.asList( new Object[][] { {Arrays.asList("H", "O"),
-                Arrays.asList( 2,   1 ),
-                "H2O",
-                "water"},
+        return Arrays.asList( new Object[][] { {Arrays.asList("Na", "Cl"),
+                Arrays.asList( 1,   1 ),
+                "NaCl",
+                "salt"},
 
                 {Arrays.asList("Mg", "H", "O"),
                         Arrays.asList(  1,   2,   2 ),
